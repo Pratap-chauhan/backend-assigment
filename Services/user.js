@@ -7,6 +7,7 @@ const {OAuth2Client} = require('google-auth-library');
 module.exports={
     
 checkMail: async (mail)=>{
+    console.log(">>>>",mail)
     try{
         let a = await new Promise((resolve,reject)=>{
             connection.query(`SELECT * from user WHERE email=?`,[mail],(err,res)=>{

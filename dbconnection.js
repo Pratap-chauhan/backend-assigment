@@ -3,12 +3,14 @@ const mysql = require("mysql");
 global.connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  database: "api"
+ password : "root",
+  database: "api",
+  port:"8889"
 });
 
 connection.connect((err) => {
   if(err) {
-    console.log("Connection error");
+    console.log("Connection error",err);
   }
   else {
     console.log("connected succesfully");

@@ -7,6 +7,7 @@ module.exports = [
         method: 'POST',
         path: '/customer/register',
         handler: async (request)=> {
+            console.log("><><><><",request)
             try{
                 return await controller.user.register(request.payload);
             }
@@ -39,6 +40,7 @@ module.exports = [
     method: 'POST',
     path: '/user/signin',
     handler: async (request)=>{
+        console.log("><><><><<")
         try{
             return controller.user.signin(request.payload);
         }

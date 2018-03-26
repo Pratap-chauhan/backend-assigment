@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     register :async (body)=>{
+        console.log(">>>>>>>>>")
         try{
             let status = await services.user.checkMail(body.email);
             
