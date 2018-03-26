@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const controller  = require('../Controller');
 const ResponseSend = require('../Boom/response.js')
+const request = require('request');
 
 module.exports = [
     {
@@ -52,6 +53,12 @@ module.exports = [
         description: 'Signin form',
         notes: 'Returns the Access token ',
         tags: ['api'],
+        // config: {
+            // cors: {
+            //     origin: ['*'],
+            //     additionalHeaders: ['cache-control', 'x-requested-with']
+            // },
+        // },
         plugins: {
             'hapi-swagger': {
                 payloadType: 'form'
@@ -96,3 +103,6 @@ module.exports = [
     
 },
 ]
+
+// facebook: 'https://graph.facebook.com/v2.10/me?access_token=',
+// google: 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=',

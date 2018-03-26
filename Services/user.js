@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const {OAuth2Client} = require('google-auth-library');
+const request = require('request');
 module.exports={
     
 checkMail: async (mail)=>{
@@ -69,21 +70,30 @@ addData: async (data)=>{
 
 
   socialsignin : async(token)=>{
-    
-    const CLIENT_ID = '894829491932-c10ip6fk723v40vfb8ispg21j7dige0t.apps.googleusercontent.com;'
-    const client = new OAuth2Client(CLIENT_ID);
-    async function verify() {
-      const ticket = await client.verifyIdToken({
-          idToken: token,
-          audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+      // facebook: 'https://graph.facebook.com/v2.10/me?access_token=',
+// google: 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=',
+   let  verificationURI='https:www.googleapis.com/oauth2/v1/tokeninfo?access_token='+token
+    // const CLIENT_ID = '894829491932-c10ip6fk723v40vfb8ispg21j7dige0t.apps.googleusercontent.com;'
+    // const client = new OAuth2Client(CLIENT_ID);
+    // async function verify() {
+    //   const ticket = await client.verifyIdToken({
+    //       idToken: token,
+    //       audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
           // Or, if multiple clients access the backend:
           //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
-      });
-      const payload = ticket.getPayload();
-      const userid = payload['sub'];
+    //   });
+    //   const payload = ticket.getPayload();
+    //   const userid = payload['sub'];
       // If request specified a G Suite domain:
       //const domain = payload['hd'];
-    }
-    return verify().catch(console.error);
+    // }
+    // return verify().catch(console.error);
+
+
+    request(verificationURI, (error, response, body) => {
+
+console.log("errr",error,body,response);
+
+    })
   }
 }

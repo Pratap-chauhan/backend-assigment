@@ -5,7 +5,7 @@ const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 
-const server = Hapi.server({ port: 3010, host: 'localhost' });
+const server = Hapi.server({ port: 3010, host: 'localhost', routes: { cors: true }  });
 
 const options = {
     info:{
@@ -24,7 +24,10 @@ const init = async () => {
     ]);
     try{
        await connection.connection;
+       console.log("list of routes ",routes)
+       server.route(routes)
         await server.start();
+
         }
         catch(err){
             throw err
@@ -35,4 +38,3 @@ const init = async () => {
 
 init();
 
-server.route(routes)

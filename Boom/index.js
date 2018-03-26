@@ -6,9 +6,9 @@ module.exports = {
         eng: {
             emailExit: Boom.conflict("Email Already exist"),
             invalidCredentials: Boom.unauthorized("Invalid Credentials"),
-            userNotFound: Boom.notFound("User Not found"),
+            userNotFound: Boom.unauthorized("User Not found"),
             jobexist: Boom.conflict("job Already exist"),
-            nojob: Boom.notFound('User has not assigned any job'),
+            nojob: Boom.badRequest('User has not assigned any job'),
             notassigned: Boom.notFound('this job is not assigned to user'),
             token: Boom.unauthorized("Inavlid token"),
             numberExist: Boom.conflict("Number Already exist"), 
