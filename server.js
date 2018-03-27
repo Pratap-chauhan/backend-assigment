@@ -24,7 +24,7 @@ const init = async () => {
     ]);
     try{
        await connection.connection;
-       console.log("list of routes ",routes)
+    //    console.log("list of routes ",routes)
        server.route(routes)
         await server.start();
 
