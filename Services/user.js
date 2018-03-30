@@ -5,16 +5,20 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const {OAuth2Client} = require('google-auth-library');
 const request = require('request');
+
 module.exports={
     
 checkMail: async (mail)=>{
-    console.log(">>>>",mail)
+    // console.log(">>>>",mail)
     try{
         let a = await new Promise((resolve,reject)=>{
             connection.query(`SELECT * from user WHERE email=?`,[mail],(err,res)=>{
-            if(err)
+            if(err){
+            // console.log("email",res)
             return reject(err)
+            }
             else{
+                // console.log("email",res)
             return resolve(res);
              } })
         });
@@ -67,8 +71,6 @@ addData: async (data)=>{
                 
             return dat.values
   },
-
-
   socialsignin : async(token)=>{
       // facebook: 'https://graph.facebook.com/v2.10/me?access_token=',
 // google: 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=',
@@ -98,6 +100,6 @@ addData: async (data)=>{
 
 //     })
   }
-return(verify)
-}
+// return(verify)
+},
 }

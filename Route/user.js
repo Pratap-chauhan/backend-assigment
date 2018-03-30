@@ -4,11 +4,11 @@ const ResponseSend = require('../Boom/response.js')
 const request = require('request');
 
 module.exports = [
-    {
+    {  
         method: 'POST',
         path: '/customer/register',
         handler: async (request)=> {
-            console.log("><><><><",request)
+            // console.log("><><><><",request)
             try{
                 return await controller.user.register(request.payload);
             }
@@ -27,22 +27,21 @@ module.exports = [
             }, 
             validate: {
                 payload: {
-                    name: Joi.string().min(5).max(20).error(new Error('name is not valid')).required(),
-                    lastname:Joi.string().min(5).max(20).error(new Error('name is not valid')),
+                    name: Joi.string().error(new Error('name is not valid')).required(),
+                    lastname:Joi.string().error(new Error('name is not valid')),
                     email: Joi.string().email().min(4).max(30).error(new Error('Email is not valid')).required(),
                     password: Joi.string().min(4).max(15).error(new Error('Password must be 4 to 15 characters long')).required(),
-                    phoneNumber: Joi.string().min(8).max(10).error(new Error('Number must be 10 characters long')).required(),
+                    phoneNumber: Joi.number().min(10).error(new Error('Number must be 10 characters long')).required(),
                     DOB: Joi.date().error(new Error('DOB is not valid'))                
                 }
             }
         }
     },
-
     {
     method: 'POST',
     path: '/user/signin',
     handler: async (request)=>{
-        console.log("><><><><<")
+        // console.log("><><><><<")
         try{
             return controller.user.signin(request.payload);
         }
@@ -74,7 +73,6 @@ module.exports = [
     },
     
 },
-
 {
     method: 'POST',
     path: '/user/socialsignin',
@@ -99,6 +97,35 @@ module.exports = [
             headers: Joi.object({
                 'token': Joi.string().required()
             }).unknown()
+        }
+    },
+    
+},
+{
+    method: 'POST',
+    path: '/user/getProfileDetail',
+    handler: async (request)=>{
+        console.log(">>>>>>>>>email",request.payload)
+        try{
+            return controller.user.getProfileDetail(request.payload);
+        }
+        catch(err){
+            return ResponseSend.sendError(err);
+        }
+    },
+    config: {
+        description: 'Profile Detail',
+        notes: 'Returns the Profile Detail ',
+        tags: ['api'],
+        plugins: {
+            'hapi-swagger': {
+                payloadType: 'form'
+            }
+        }, 
+        validate: {
+            payload: {
+                email: Joi.string().email().min(5).max(30).required()
+            }
         }
     },
     
